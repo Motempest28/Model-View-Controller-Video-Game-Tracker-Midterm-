@@ -1,0 +1,82 @@
+﻿@*@model IEnumerable<Midterm.Models.VideoGame>*@
+@model Midterm.Models.VideoGameGenreViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="VideoGames" asp-action="Index">
+    <p>
+        <select asp-for="VideoGameGenre" asp-items="Model.Genres">
+            <option value="">All</option>
+        </select>
+
+        Title: <input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VideoGames![0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VideoGames![0].Publisher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VideoGames![0].Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VideoGames![0].MSRP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VideoGames![0].ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VideoGames![0].Summary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VideoGames[0].Rating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var objects in Model.VideoGames!) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => objects.Title)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => objects.Publisher)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => objects.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => objects.MSRP)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => objects.ReleaseDate)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => objects.Summary)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => objects.Rating)
+                </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@objects.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@objects.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@objects.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
